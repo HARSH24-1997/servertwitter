@@ -4,7 +4,7 @@ require('dotenv').config();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: `${process.config.SECRET}` });
+  res.render('index', { title: `${process.env.SECRET}` });
 });
 
 module.exports = router;
