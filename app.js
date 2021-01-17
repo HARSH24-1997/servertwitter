@@ -84,22 +84,22 @@ app.get("/login/callback", passport.authenticate('twitter'), async (req, res) =>
 
     const { token, tokenSecret, id, screen_name, profile_image_url, name } = req.session.passport.user
     //console.log(id)
-    let T = getT(token, tokenSecret)
+//     let T = getT(token, tokenSecret)
   
-    var stream2 = T.stream("statuses/filter", { track: screen_name, follow: [id] })
+//     var stream2 = T.stream("statuses/filter", { track: screen_name, follow: [id] })
   
-    stream2.on('tweet', function (data) {
+//     stream2.on('tweet', function (data) {
   
-      if (data.user.screen_name !== screen_name) {
-        //console.log("tweet", data.user.screen_name, screen_name)
-        io.emit("mention", data)
-      }
-      else {
-        //console.log("follow")
-        io.emit("follow", data)
-      }
+//       if (data.user.screen_name !== screen_name) {
+//         //console.log("tweet", data.user.screen_name, screen_name)
+//         io.emit("mention", data)
+//       }
+//       else {
+//         //console.log("follow")
+//         io.emit("follow", data)
+//       }
   
-    })
+//     })
   
     res.redirect(`https://helpdesktwitterharsh.netlify.app/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
   
