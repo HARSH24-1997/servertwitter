@@ -55,7 +55,7 @@ app.use('/users', usersRouter);
 passport.use(new TwitterStrategy({
   consumerKey: process.env.consumerKey,
   consumerSecret: process.env.consumerSecret,
-  callbackURL: "http://localhost:8000/login/callback"
+  callbackURL: "https://twitterserverharsh.herokuapp.com/login/callback"
 },
   function (token, tokenSecret, profile, cb) {
     //console.log(profile._json)
