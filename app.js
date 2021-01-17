@@ -101,7 +101,7 @@ app.get("/login/callback", passport.authenticate('twitter'), async (req, res) =>
   
 //     })
   
-    res.redirect(`https://helpdesktwitterharsh.netlify.app/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
+    res.redirect(`http://localhost:3000/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
   
   })
   
