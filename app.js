@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors(
   {
-    origin: "https://helpdesktwitterharsh.netlify.app",
+    origin: "http://localhost:3000",
     credentials: true
   }
 ))
