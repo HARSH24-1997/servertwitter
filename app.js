@@ -113,7 +113,7 @@ app.get("/logout", (req, res) => {
 
 app.get("/mentions", async (req, res) => {
   try {
-    console.log(req.session.passport.user);
+    console.log(req.session);
     const { token, tokenSecret, id, screen_name } = req.session.passport.user
     let Temp = twitToken(token, tokenSecret)
     const mentions = await Temp.get(`statuses/mentions_timeline`)
