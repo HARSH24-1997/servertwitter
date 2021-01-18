@@ -117,6 +117,7 @@ app.get("/mentions", async (req, res) => {
     res.send(arr.concat(userStatuses.data,mentions.data))
   }
   catch (err) {
+    console.log(err)
     res.status(400).send(err)
   }
 })
