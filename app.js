@@ -90,7 +90,7 @@ app.use(passport.session())
 app.get('/login', passport.authenticate('twitter'));
 
 app.get("/login/callback", passport.authenticate('twitter'), async (req, res) => {
-
+  console.log(req.session.passport.user,"f);
   const { token, tokenSecret, id, screen_name, profile_image_url, name } = req.session.passport.user
   let Temp = twitToken(token, tokenSecret)
   var stream2 = Temp.stream("statuses/filter", { track: screen_name, follow: [id] })
@@ -113,6 +113,7 @@ app.get("/logout", (req, res) => {
 
 app.get("/mentions", async (req, res) => {
   try {
+    console.log(req.session.passport.user);
     const { token, tokenSecret, id, screen_name } = req.session.passport.user
     let Temp = twitToken(token, tokenSecret)
     const mentions = await Temp.get(`statuses/mentions_timeline`)
