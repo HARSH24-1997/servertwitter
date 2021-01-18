@@ -52,7 +52,7 @@ app.use('/users', usersRouter);
 passport.use(new TwitterStrategy({
   consumerKey: process.env.consumerKey,
   consumerSecret: process.env.consumerSecret,
-  callbackURL: "http://localhost:3000/login/callback"
+  callbackURL: "https://twitterserverharsh.herokuapp.com/login/callback"
 },
   function (token, tokenSecret, profile, cb) {
     const { id, screen_name, profile_image_url, name } = profile._json
@@ -96,7 +96,7 @@ app.get("/login/callback", passport.authenticate('twitter'), async (req, res) =>
       io.emit("follow", data)
     }
   })
-  res.redirect(`https://helpdesktwitterharsh.netlify.app/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
+  res.redirect(`http://localhost:3000/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
 })
 
 app.get("/logout", (req, res) => {
