@@ -6,8 +6,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var Twit = require('twit')
-var socketio = require('socket.io')
 var http = require("http");
+var socketio = require('socket.io');
+var app = express();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,7 +16,7 @@ var usersRouter = require('./routes/users');
 const server = require('http').createServer(app);
 const io =socketio(server);
 
-var app = express();
+
 const cors = require("cors")
 const session = require("express-session")
 var passport = require("passport")
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors(
   {
-    origin: "https://helpdesktwitterharsh.netlify.app",
+    origin: "https://https://helpdesktwitterharsh.netlify.app",
     credentials: true
   }
 ))
@@ -91,9 +92,11 @@ app.get("/login/callback", passport.authenticate('twitter'), async (req, res) =>
   stream2.on('tweet', function (data) {
     if (data.user.screen_name !== screen_name) {
       io.emit("mention", data)
+      console.log(data,"mention")
     }
     else {
       io.emit("follow", data)
+      console.log(data,"mention")
     }
   })
   res.redirect(`https://helpdesktwitterharsh.netlify.app/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
@@ -111,8 +114,6 @@ app.get("/mentions", async (req, res) => {
     let Temp = twitToken(token, tokenSecret)
     const mentions = await Temp.get(`statuses/mentions_timeline`)
     const userStatuses = await Temp.get(`statuses/user_timeline`)
-    console.log(mentions.data)
-    console.log(userStatuses.data)
     var arr =[];
     res.send(arr.concat(userStatuses.data,mentions.data))
   }
