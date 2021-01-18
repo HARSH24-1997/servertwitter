@@ -38,20 +38,6 @@ app.use(cors(
   }
 ))
 
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60,
-      path: "/",
-      httpOnly: false
-    },
-    rolling: true
-  })
-);
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
