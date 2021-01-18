@@ -43,6 +43,12 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+      path: "/",
+      httpOnly: false
+    },
+    rolling: true
   })
 );
 
