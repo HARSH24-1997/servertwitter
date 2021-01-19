@@ -51,6 +51,13 @@ app.use(
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 passport.use(new TwitterStrategy({
   consumerKey: process.env.consumerKey,
   consumerSecret: process.env.consumerSecret,
@@ -100,7 +107,7 @@ app.get("/login/callback", passport.authenticate('twitter'), async (req, res) =>
       console.log(data,"mention")
     }
   })
-  res.redirect(`https://helpdesktwitterharsh.netlify.app/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
+  res.redirect(`/logincomplete?&${token}&${tokenSecret}&${screen_name}&${profile_image_url}&${name}`)
 })
 
 app.get("/logout", (req, res) => {
